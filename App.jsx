@@ -6,7 +6,6 @@ import MainPage from './screens/MainPage';
 function App() {
   return (
     <View>
-      <Text>Hello, world!</Text>
       <Audio />
       <MainPage />
     </View>
