@@ -1,17 +1,19 @@
 import React from 'react';
 import {Text, View} from 'react-native';
-import React, {useEffect, useRef, useState, useCallback} from 'react';
+// import React, {useEffect, useRef, useState, useCallback} from 'react';
 import {
   StyleSheet,
   TextInput,
-  View,
   Image,
   useWindowDimensions,
   Animated,
   Keyboard,
   Platform,
   KeyboardAvoidingView,
+  Image,
 } from 'react-native';
+// import Images from '../android/app/src/main/assets/images';
+import Images from 'assets';
 
 function MainPage() {
   return (
@@ -26,7 +28,9 @@ function MainPage() {
 function MainAnimated() {
   return (
     <>
-      <div style={styles.block}></div>
+      <div style={styles.block}>
+        <image source={Images.MainBackgorund} />
+      </div>
     </>
   );
 }
