@@ -1,5 +1,5 @@
-import React from 'react';
-import {Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {Text, View, TouchableOpacity} from 'react-native';
 // import React, {useEffect, useRef, useState, useCallback} from 'react';
 import {
   StyleSheet,
@@ -24,6 +24,12 @@ function MainPage() {
 }
 
 function MainAnimated() {
+  const [playBtnClicked, setPlayBtnClicked] = useState(false); //play버튼 클릭 시
+
+  const handlePlayBtnClick = () => {
+    setPlayBtnClicked(!playBtnClicked);
+  };
+
   return (
     <>
       <View style={styles.block}>
@@ -32,7 +38,18 @@ function MainAnimated() {
           <Image source={Images.Object1} style={styles.object1} />
           <Image source={Images.Object2} style={styles.object2} />
           <Image source={Images.Title} style={styles.title} />
-          <Image source={Images.PlayBtn} style={styles.playBtn} />
+          <TouchableOpacity
+            style={[
+              styles.playBtn,
+              {backgroundColor: playBtnClicked ? 'green' : 'transparent'},
+            ]}
+            activeOpacity={0.7}
+            onPress={handlePlayBtnClick}>
+            <Image
+              source={Images.PlayBtn}
+              style={{width: '100%', height: '100%'}}
+            />
+          </TouchableOpacity>
         </View>
       </View>
     </>
@@ -91,6 +108,11 @@ const styles = StyleSheet.create({
     width: '35%',
     height: '5%',
     flexShrink: 0,
+    // borderWidth: 2,
+    borderColor: 'green',
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
