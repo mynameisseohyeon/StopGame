@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
-// import React, {useEffect, useRef, useState, useCallback} from 'react';
 import {
   StyleSheet,
   TextInput,
@@ -22,20 +21,21 @@ function CharacterSelectPage() {
 }
 
 function CharacterSelectPageView() {
-  const [characterBtnHeight, setCharacterBtnHeight] = useState(75.001);
-  const [characterBtnColor, setCharacterBtnColor] = useState('blue');
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [selectedCharacters, setSelectedCharacters] = useState([]);
 
-  const handleCharacterBtnClick = () => {
-    if (isExpanded) {
-      setCharacterBtnHeight(75.001);
-      setCharacterBtnColor('blue');
+  const handleCharacterPress = character => {
+    const isSelected = selectedCharacters.includes(character);
+
+    if (isSelected) {
+      setSelectedCharacters(prevCharacters =>
+        prevCharacters.filter(char => char !== character),
+      );
     } else {
-      setCharacterBtnHeight(prevHeight => prevHeight - 5);
-      setCharacterBtnColor('red');
+      setSelectedCharacters(prevCharacters => [...prevCharacters, character]);
     }
-    setIsExpanded(prevState => !prevState);
   };
+
+  const isPlayButtonVisible = selectedCharacters.length === 2;
 
   return (
     <>
@@ -47,26 +47,46 @@ function CharacterSelectPageView() {
         <View style={styles.inner}>
           <View style={styles.Character}>
             <View style={styles.charactersRow}>
-              <Image source={Images.Character1} style={styles.character1} />
-              <Image source={Images.Character2} style={styles.character2} />
-              <Image source={Images.Character3} style={styles.character3} />
+              <TouchableOpacity
+                onPress={() => handleCharacterPress('character1')}
+                style={[
+                  selectedCharacters.includes('character1') &&
+                    styles.selectedCharacter,
+                ]}>
+                <Image source={Images.Character1} style={styles.character1} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => handleCharacterPress('character2')}
+                style={[
+                  selectedCharacters.includes('character2') &&
+                    styles.selectedCharacter,
+                ]}>
+                <Image source={Images.Character2} style={styles.character2} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => handleCharacterPress('character3')}
+                style={[
+                  selectedCharacters.includes('character3') &&
+                    styles.selectedCharacter,
+                ]}>
+                <Image source={Images.Character3} style={styles.character3} />
+              </TouchableOpacity>
             </View>
           </View>
           <Image
             source={Images.CharacterPageTitle}
             style={styles.CharacterPageTitle}
           />
-          <TouchableOpacity
-            onPress={handleCharacterBtnClick}
-            style={[
-              styles.CharacterBtn,
-              {height: characterBtnHeight, backgroundColor: characterBtnColor},
-            ]}>
-            <Image
-              source={Images.CharacterBtn}
-              style={styles.CharacterBtnImage}
-            />
-          </TouchableOpacity>
+          {isPlayButtonVisible && (
+            <TouchableOpacity
+              onPress={() => console.log('Play button pressed')}
+              style={styles.PlayButton}>
+              <Image
+                source={Images.CharacterBtn}
+                style={styles.CharacterBtnImage}
+              />
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </>
@@ -107,29 +127,30 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  selectedCharacter: {
+    borderColor: 'white',
+    opacity: 0.7,
+  },
   character1: {
-    position: 'absolute',
     width: 81.992,
     height: 240.821,
     flexShrink: 0,
-    right: 100,
-    top: -35,
+    top: -10,
+    right: 105,
   },
   character2: {
-    position: 'absolute',
     width: 112.713,
     height: 266.435,
     flexShrink: 0,
-    right: 205,
-    top: -60,
+    top: -10,
+    right: 105,
   },
   character3: {
-    position: 'absolute',
     width: 81.966,
     height: 240.818,
     flexShrink: 0,
-    right: 340,
-    top: -35,
+    top: -10,
+    right: 105,
   },
   CharacterPageTitle: {
     width: '85%',
@@ -138,16 +159,14 @@ const styles = StyleSheet.create({
     top: 140,
     right: -50,
   },
-  CharacterBtn: {
+  PlayButton: {
     width: 130.606,
+    height: 75.001,
     flexShrink: 0,
     top: 420,
     right: -200,
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: 'black',
-    borderRadius: 5,
   },
   CharacterBtnImage: {
     width: '100%',
