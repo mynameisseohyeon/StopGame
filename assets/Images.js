@@ -3,6 +3,7 @@ const images = {
   Title: require('./images/title.png'),
   Object1: require('./images/object1.png'),
   Object2: require('./images/object2.png'),
+  PlayBtn: require('./images/playBtn.png'),
 };
 
 export default images;

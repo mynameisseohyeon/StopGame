@@ -29,9 +29,10 @@ function MainAnimated() {
       <View style={styles.block}>
         <Image source={Images.MainBackground} style={styles.backgroundImage} />
         <View style={styles.inner}>
+          <Image source={Images.Object1} style={styles.object1} />
           <Image source={Images.Object2} style={styles.object2} />
           <Image source={Images.Title} style={styles.title} />
-          <Image source={Images.Object1} style={styles.object1} />
+          <Image source={Images.PlayBtn} style={styles.playBtn} />
         </View>
       </View>
     </>
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     width: '100%',
-    height: '100%',
+    height: '90%',
   },
   inner: {
     position: 'relative',
@@ -61,26 +62,34 @@ const styles = StyleSheet.create({
   },
   title: {
     position: 'absolute',
-    top: 0,
-    left: 0,
+    top: 250,
+    left: 70,
     width: 365,
     height: 166,
     flexShrink: 0,
   },
   object1: {
     position: 'absolute',
-    bottom: 0,
-    right: 0,
-    width: 310,
-    height: 406,
+    bottom: 250,
+    right: 240,
+    width: 260,
+    height: 356,
     flexShrink: 0,
   },
   object2: {
     position: 'absolute',
-    top: 0,
-    right: 0,
+    top: 100,
+    right: 50,
     width: 146,
     height: 186,
+    flexShrink: 0,
+  },
+  playBtn: {
+    position: 'absolute',
+    top: 450,
+    right: 170,
+    width: '35%',
+    height: '5%',
     flexShrink: 0,
   },
 });
