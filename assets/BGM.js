@@ -1,5 +1,7 @@
-const BGM = {
-  MainBGM: require('./audio/MainBGM.mp3'),
-};
+// import Sound from 'react-native-sound';
 
-export default BGM;
+// const BGM = {
+//   MainBGM: require('../android/app/src/main/res/raw/MainBGM.mp3'),
+// };
+
+// export default BGM;
