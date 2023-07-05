@@ -22,6 +22,21 @@ function CharacterSelectPage() {
 }
 
 function CharacterSelectPageView() {
+  const [characterBtnHeight, setCharacterBtnHeight] = useState(75.001);
+  const [characterBtnColor, setCharacterBtnColor] = useState('blue');
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleCharacterBtnClick = () => {
+    if (isExpanded) {
+      setCharacterBtnHeight(75.001);
+      setCharacterBtnColor('blue');
+    } else {
+      setCharacterBtnHeight(prevHeight => prevHeight - 5);
+      setCharacterBtnColor('red');
+    }
+    setIsExpanded(prevState => !prevState);
+  };
+
   return (
     <>
       <View style={styles.block}>
@@ -41,7 +56,17 @@ function CharacterSelectPageView() {
             source={Images.CharacterPageTitle}
             style={styles.CharacterPageTitle}
           />
-          <Image source={Images.CharacterBtn} style={styles.CharacterBtn} />
+          <TouchableOpacity
+            onPress={handleCharacterBtnClick}
+            style={[
+              styles.CharacterBtn,
+              {height: characterBtnHeight, backgroundColor: characterBtnColor},
+            ]}>
+            <Image
+              source={Images.CharacterBtn}
+              style={styles.CharacterBtnImage}
+            />
+          </TouchableOpacity>
         </View>
       </View>
     </>
@@ -115,10 +140,19 @@ const styles = StyleSheet.create({
   },
   CharacterBtn: {
     width: 130.606,
-    height: 75.001,
     flexShrink: 0,
     top: 420,
     right: -200,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 5,
+  },
+  CharacterBtnImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain',
   },
 });
 
