@@ -10,6 +10,7 @@ const images = {
   Character2: require('./images/Character2.png'),
   Character3: require('./images/Character3.png'),
   CharacterPageTitle: require('./images/CharacterPageTitle.png'),
+  CharacterBtn: require('./images/CharacterBtn.png'),
 
   CharacterIcon1: require('./images/CharacterIcon1.png'),
   CharacterIcon2: require('./images/CharacterIcon2.png'),

@@ -17,13 +17,13 @@ function MainPage() {
   return (
     <>
       <View>
-        <MainAnimated />
+        <MainPageView />
       </View>
     </>
   );
 }
 
-function MainAnimated() {
+function MainPageView() {
   const [playBtnClicked, setPlayBtnClicked] = useState(false); //play버튼 클릭 시
 
   const handlePlayBtnClick = () => {
