@@ -4,7 +4,6 @@ import {Text, View} from 'react-native';
 import {
   StyleSheet,
   TextInput,
-  Image,
   useWindowDimensions,
   Animated,
   Keyboard,
@@ -12,14 +11,14 @@ import {
   KeyboardAvoidingView,
   Image,
 } from 'react-native';
-// import Images from '../android/app/src/main/assets/images';
-import Images from 'assets';
+import Images from '../assets/Images';
 
 function MainPage() {
   return (
     <>
       <View>
         <Text>안녕하세요</Text>
+        <MainAnimated></MainAnimated>
       </View>
     </>
   );
@@ -28,9 +27,9 @@ function MainPage() {
 function MainAnimated() {
   return (
     <>
-      <div style={styles.block}>
-        <image source={Images.MainBackgorund} />
-      </div>
+      <View style={styles.block}>
+        <Image source={Images.MainBackground} />
+      </View>
     </>
   );
 }
