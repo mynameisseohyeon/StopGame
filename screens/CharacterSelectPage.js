@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 import {
   StyleSheet,
@@ -10,6 +10,7 @@ import {
   KeyboardAvoidingView,
   Image,
 } from 'react-native';
+
 import Images from '../assets/Images';
 
 function CharacterSelectPage() {
@@ -22,6 +23,7 @@ function CharacterSelectPage() {
 
 function CharacterSelectPageView() {
   const [selectedCharacters, setSelectedCharacters] = useState([]); //선택된 캐릭터 함수
+  const [titleOpacity] = useState(new Animated.Value(0)); //title투명도 조절 초깃값 0설정
 
   const handleCharacterPress = character => {
     const isSelected = selectedCharacters.includes(character);
@@ -39,9 +41,21 @@ function CharacterSelectPageView() {
   const isPlayButtonVisible = selectedCharacters.length === 2; //캐릭터가 2개 선택된 경우 play버튼 활성화
 
   const handlePlayButtonPress = () => {
+    //play버튼을 눌렀을 때
     console.log('Play button pressed');
-    setSelectedCharacters([]); // 선택 초기화
+    setSelectedCharacters([]); //캐릭터 선택 초기화
   };
+
+  useEffect(() => {
+    //해당 페이지 실행과 동시에 2초 동안 title의 투명도를 0에서 1로 변경
+    const animation = Animated.timing(titleOpacity, {
+      toValue: 1,
+      duration: 2000,
+      useNativeDriver: true,
+    });
+
+    animation.start();
+  }, []);
 
   return (
     <>
@@ -79,9 +93,9 @@ function CharacterSelectPageView() {
               </TouchableOpacity>
             </View>
           </View>
-          <Image
+          <Animated.Image
             source={Images.CharacterPageTitle}
-            style={styles.CharacterPageTitle}
+            style={[styles.CharacterPageTitle, {opacity: titleOpacity}]}
           />
           {isPlayButtonVisible && (
             <TouchableOpacity
