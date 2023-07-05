@@ -21,12 +21,13 @@ function CharacterSelectPage() {
 }
 
 function CharacterSelectPageView() {
-  const [selectedCharacters, setSelectedCharacters] = useState([]);
+  const [selectedCharacters, setSelectedCharacters] = useState([]); //선택된 캐릭터 함수
 
   const handleCharacterPress = character => {
     const isSelected = selectedCharacters.includes(character);
 
     if (isSelected) {
+      //캐릭터가 선택된 경우
       setSelectedCharacters(prevCharacters =>
         prevCharacters.filter(char => char !== character),
       );
@@ -35,7 +36,12 @@ function CharacterSelectPageView() {
     }
   };
 
-  const isPlayButtonVisible = selectedCharacters.length === 2;
+  const isPlayButtonVisible = selectedCharacters.length === 2; //캐릭터가 2개 선택된 경우 play버튼 활성화
+
+  const handlePlayButtonPress = () => {
+    console.log('Play button pressed');
+    setSelectedCharacters([]); // 선택 초기화
+  };
 
   return (
     <>
@@ -79,7 +85,7 @@ function CharacterSelectPageView() {
           />
           {isPlayButtonVisible && (
             <TouchableOpacity
-              onPress={() => console.log('Play button pressed')}
+              onPress={handlePlayButtonPress}
               style={styles.PlayButton}>
               <Image
                 source={Images.CharacterBtn}
