@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
-// import React, {useEffect, useRef, useState, useCallback} from 'react';
 import {
   StyleSheet,
   TextInput,
@@ -25,10 +24,23 @@ function MainPage() {
 
 function MainPageView() {
   const [playBtnClicked, setPlayBtnClicked] = useState(false); //play버튼 클릭 시
+  const [titleOpacity] = useState(new Animated.Value(0));
 
   const handlePlayBtnClick = () => {
-    //클릭 시 ture와 false가 전환된다
+    //클릭 시 true와 false가 전환된다
     setPlayBtnClicked(!playBtnClicked);
+  };
+
+  useEffect(() => {
+    Animated.timing(titleOpacity, {
+      toValue: 1,
+      duration: 2000,
+      useNativeDriver: true,
+    }).start();
+  }, []);
+
+  const getOpacityStyle = () => {
+    return {opacity: playBtnClicked ? 0.5 : 1};
   };
 
   return (
@@ -36,14 +48,20 @@ function MainPageView() {
       <View style={styles.block}>
         <Image source={Images.MainBackground} style={styles.backgroundImage} />
         <View style={styles.inner}>
-          <Image source={Images.Object1} style={styles.object1} />
-          <Image source={Images.Object2} style={styles.object2} />
-          <Image source={Images.Title} style={styles.title} />
+          <Animated.Image
+            source={Images.Object1}
+            style={[styles.object1, {opacity: titleOpacity}]}
+          />
+          <Animated.Image
+            source={Images.Object2}
+            style={[styles.object2, {opacity: titleOpacity}]}
+          />
+          <Animated.Image
+            source={Images.Title}
+            style={[styles.title, {opacity: titleOpacity}]}
+          />
           <TouchableOpacity
-            style={[
-              styles.playBtn,
-              {backgroundColor: playBtnClicked ? 'green' : 'transparent'},
-            ]}
+            style={[styles.playBtn, getOpacityStyle()]}
             activeOpacity={0.7}
             onPress={handlePlayBtnClick}>
             <Image

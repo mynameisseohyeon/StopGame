@@ -8,8 +8,8 @@ function App() {
   return (
     <View>
       <Audio />
-      {/* <MainPage /> */}
-      <CharacterSelectPage />
+      <MainPage />
+      {/* <CharacterSelectPage /> */}
     </View>
   );
 }

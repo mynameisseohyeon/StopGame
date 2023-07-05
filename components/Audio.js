@@ -7,7 +7,7 @@ import Sound from 'react-native-sound';
 const Audio = () => {
   useEffect(() => {
     // MP3 파일 경로
-    const soundPath = Sound.MAIN_BUNDLE + '/raw/MainBGM.mp3';
+    const soundPath = Sound.MAIN_BUNDLE + '/raw/mainbgm.mp3';
 
     // 사운드 객체 생성
     const sound = new Sound(soundPath, Sound.MAIN_BUNDLE, error => {
