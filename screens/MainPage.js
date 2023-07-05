@@ -27,6 +27,7 @@ function MainAnimated() {
   const [playBtnClicked, setPlayBtnClicked] = useState(false); //play버튼 클릭 시
 
   const handlePlayBtnClick = () => {
+    //클릭 시 ture와 false가 전환된다
     setPlayBtnClicked(!playBtnClicked);
   };
 

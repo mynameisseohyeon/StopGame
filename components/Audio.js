@@ -2,11 +2,12 @@
 
 import React, {useEffect} from 'react';
 import Sound from 'react-native-sound';
+import BGM from '../assets/BGM';
 
 const Audio = () => {
   useEffect(() => {
     // MP3 파일 경로
-    const soundPath = 'MainBGM.mp3';
+    const soundPath = BGM.MainBGM;
 
     // 사운드 객체 생성
     const sound = new Sound(soundPath, Sound.MAIN_BUNDLE, error => {
