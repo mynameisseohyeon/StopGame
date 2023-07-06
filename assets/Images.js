@@ -18,6 +18,9 @@ const images = {
   HeaderBtn1: require('./images/headerBtn1.png'),
   HeaderBtn2: require('./images/headerBtn2.png'),
   HeaderBtn3: require('./images/headerBtn3.png'),
+  Background3: require('./images/Background3.png'),
+  Background4: require('./images/Background4.png'),
+  Background5: require('./images/Background5.png'),
 };
 
 export default images;

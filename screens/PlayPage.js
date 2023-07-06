@@ -23,29 +23,33 @@ function PlayPage() {
 }
 
 function PlayPagenView() {
-  const [playBtnClicked, setPlayBtnClicked] = useState(false); //play버튼 클릭 시
-  const [titleOpacity] = useState(new Animated.Value(0));
-
-  const handlePlayBtnClick = () => {
-    //클릭 시 true와 false가 전환된다
-    setPlayBtnClicked(!playBtnClicked);
-  };
-
-  useEffect(() => {
-    Animated.timing(titleOpacity, {
-      toValue: 1,
-      duration: 2000,
-      useNativeDriver: true,
-    }).start();
-  }, []);
-
-  const getOpacityStyle = () => {
-    return {opacity: playBtnClicked ? 0.5 : 1};
-  };
-
   return (
     <>
-      <View style={styles.block}></View>
+      <View style={styles.block}>
+        <Image source={Images.Background3} style={styles.Background3} />
+        <View style={styles.inner} className="HeaderBtn">
+          <View>
+            <Image source={Images.HeaderBtn1} style={styles.HeaderBtn1} />
+            <Image source={Images.HeaderBtn2} style={styles.HeaderBtn2} />
+            <Image source={Images.HeaderBtn3} style={styles.HeaderBtn3} />
+          </View>
+          <View className="CharacterIcon">
+            <Image
+              source={Images.CharacterIcon1}
+              style={styles.CharacterIcon1}
+            />
+            <Image
+              source={Images.CharacterIcon2}
+              style={styles.CharacterIcon2}
+            />
+            <Image
+              source={Images.CharacterIcon3}
+              style={styles.CharacterIcon3}
+            />
+          </View>
+          <View className="OperationBtn"></View>
+        </View>
+      </View>
     </>
   );
 }
@@ -69,6 +73,13 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: 499,
     height: 915,
+    flexShrink: 0,
+  },
+  Background3: {
+    position: 'absolute',
+    width: '100%',
+    height: '95%',
+    top: -100,
     flexShrink: 0,
   },
 });

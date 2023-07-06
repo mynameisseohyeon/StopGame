@@ -10,8 +10,8 @@ function App() {
     <View>
       <Audio />
       {/* <MainPage /> */}
-      <CharacterSelectPage />
-      {/* <PlayPage /> */}
+      {/* <CharacterSelectPage /> */}
+      <PlayPage />
     </View>
   );
 }
