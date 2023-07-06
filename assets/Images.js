@@ -15,6 +15,9 @@ const images = {
   CharacterIcon1: require('./images/CharacterIcon1.png'),
   CharacterIcon2: require('./images/CharacterIcon2.png'),
   CharacterIcon3: require('./images/CharacterIcon3.png'),
+  HeaderBtn1: require('./images/headerBtn1.png'),
+  HeaderBtn2: require('./images/headerBtn2.png'),
+  HeaderBtn3: require('./images/headerBtn3.png'),
 };
 
 export default images;

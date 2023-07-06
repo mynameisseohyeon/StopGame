@@ -22,14 +22,14 @@ function CharacterSelectPage() {
 }
 
 function CharacterSelectPageView() {
-  const [selectedCharacters, setSelectedCharacters] = useState([]); //선택된 캐릭터 함수
-  const [titleOpacity] = useState(new Animated.Value(0)); //title투명도 조절 초깃값 0설정
+  const [selectedCharacters, setSelectedCharacters] = useState([]); // 선택된 캐릭터 함수
+  const [titleOpacity] = useState(new Animated.Value(0)); // title 투명도 조절 초깃값 0설정
 
   const handleCharacterPress = character => {
     const isSelected = selectedCharacters.includes(character);
 
     if (isSelected) {
-      //캐릭터가 선택된 경우
+      // 캐릭터가 선택된 경우
       setSelectedCharacters(prevCharacters =>
         prevCharacters.filter(char => char !== character),
       );
@@ -38,16 +38,16 @@ function CharacterSelectPageView() {
     }
   };
 
-  const isPlayButtonVisible = selectedCharacters.length === 2; //캐릭터가 2개 선택된 경우 play버튼 활성화
+  const isPlayButtonVisible = selectedCharacters.length === 2; // 캐릭터가 2개 선택된 경우 play 버튼 활성화
 
   const handlePlayButtonPress = () => {
-    //play버튼을 눌렀을 때
+    // play 버튼을 눌렀을 때
     console.log('Play button pressed');
-    setSelectedCharacters([]); //캐릭터 선택 초기화
+    setSelectedCharacters([]); // 캐릭터 선택 초기화
   };
 
   useEffect(() => {
-    //해당 페이지 실행과 동시에 2초 동안 title의 투명도를 0에서 1로 변경
+    // 해당 페이지 실행과 동시에 2초 동안 title의 투명도를 0에서 1로 변경
     const animation = Animated.timing(titleOpacity, {
       toValue: 1,
       duration: 2000,
@@ -74,6 +74,9 @@ function CharacterSelectPageView() {
                     styles.selectedCharacter,
                 ]}>
                 <Image source={Images.Character1} style={styles.character1} />
+                {selectedCharacters.includes('character1') && (
+                  <Text style={styles.playerText}>Player 1</Text>
+                )}
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => handleCharacterPress('character2')}
@@ -82,6 +85,9 @@ function CharacterSelectPageView() {
                     styles.selectedCharacter,
                 ]}>
                 <Image source={Images.Character2} style={styles.character2} />
+                {selectedCharacters.includes('character2') && (
+                  <Text style={styles.playerText}>Player 2</Text>
+                )}
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => handleCharacterPress('character3')}
@@ -90,6 +96,9 @@ function CharacterSelectPageView() {
                     styles.selectedCharacter,
                 ]}>
                 <Image source={Images.Character3} style={styles.character3} />
+                {selectedCharacters.includes('character3') && (
+                  <Text style={styles.playerText}>Player 3</Text>
+                )}
               </TouchableOpacity>
             </View>
           </View>
@@ -192,6 +201,14 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     resizeMode: 'contain',
+  },
+  playerText: {
+    fontFamily: 'DOSPilgiMedium',
+    fontSize: 16,
+    color: 'white',
+    marginTop: 5,
+    textAlign: 'center',
+    left: -102,
   },
 });
 
