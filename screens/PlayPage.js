@@ -28,6 +28,7 @@ function PlayPageView() {
   const [startButtonDisabled, setStartButtonDisabled] = useState(false);
   const [startButtonOpacity, setStartButtonOpacity] = useState(1);
   const [objectY] = useState(new Animated.Value(100));
+  const [objectAnimation, setObjectAnimation] = useState(null);
 
   useEffect(() => {
     // 배경 이미지 랜덤으로
@@ -68,23 +69,31 @@ function PlayPageView() {
   const StartBtnClick = () => {
     console.log('start button clicked');
     if (!startButtonDisabled) {
+      //start버튼 활성화 시
       setStartButtonDisabled(true);
       setStartButtonOpacity(0.5);
+      const randomBackgroundImage = getRandomBackgroundImage(); //배경 랜덤 이미지
+      setBackgroundImage(randomBackgroundImage);
+      const randomObjectImage = getrandomObjectImage(); //오브젝트 랜덤 이미지
+      setObjectImage(randomObjectImage);
       animateObject();
     }
   };
 
   const animateObject = () => {
-    const duration = Math.floor(Math.random() * 2300) + 200; // 0.2s ~ 2.5s 사이의 랜덤한 시간 설정
+    // 오브젝트 랜덤한 시간 동안 y값 변경
+    const duration = Math.floor(Math.random() * 2500) + 200; // 0.2s ~ 2.5s 사이의 랜덤한 시간 설정
     objectY.setValue(100); // 초기 위치로 설정
 
-    const objectAnimation = Animated.timing(objectY, {
-      toValue: 800, // 내려올 위치 설정
+    const animation = Animated.timing(objectY, {
+      toValue: 700, // 내려올 위치 설정
       duration: duration,
       useNativeDriver: false,
     });
 
-    objectAnimation.start(() => {
+    setObjectAnimation(animation);
+
+    animation.start(() => {
       setStartButtonDisabled(false);
       setStartButtonOpacity(1);
     });
@@ -92,6 +101,9 @@ function PlayPageView() {
 
   const StopBtnClick = () => {
     console.log('stop button clicked');
+    if (objectAnimation) {
+      objectAnimation.stop();
+    }
     setStartButtonDisabled(false);
     setStartButtonOpacity(1);
   };
