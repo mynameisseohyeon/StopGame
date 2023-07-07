@@ -62,6 +62,15 @@ function PlayPageView() {
     return objectImages[objectRandomIndex];
   };
 
+  const StartBtnClick = () => {
+    //start 버튼 클릭 시
+    console.log('start button clicked');
+  };
+  const StopBtnClick = () => {
+    //stop 버튼 클릭 시
+    console.log('stop button clicked');
+  };
+
   return (
     <>
       <View style={styles.block}>
@@ -72,10 +81,18 @@ function PlayPageView() {
           <Image source={objectImage} style={styles.objectImage} />
           <View style={styles.OperationBtn}>
             <TouchableOpacity>
-              <Image source={Images.StartBtn} style={styles.StartBtn} />
+              <Image
+                source={Images.StartBtn}
+                style={styles.StartBtn}
+                onPress={StartBtnClick}
+              />
             </TouchableOpacity>
             <TouchableOpacity>
-              <Image source={Images.StopBtn} style={styles.StopBtn} />
+              <Image
+                source={Images.StopBtn}
+                style={styles.StopBtn}
+                onPress={StopBtnClick}
+              />
             </TouchableOpacity>
           </View>
         </View>

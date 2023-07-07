@@ -29,6 +29,7 @@ function MainPageView() {
   const handlePlayBtnClick = () => {
     //클릭 시 true와 false가 전환된다
     setPlayBtnClicked(!playBtnClicked);
+    console.log('play button clicked');
   };
 
   useEffect(() => {
