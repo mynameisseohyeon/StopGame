@@ -24,6 +24,7 @@ function PlayPage() {
 
 function PlayPageView() {
   const [backgroundImage, setBackgroundImage] = useState(null);
+  const [objectImage, setObjectImage] = useState(null);
 
   useEffect(() => {
     //배경 이미지 랜덤으로
@@ -37,8 +38,28 @@ function PlayPageView() {
       Images.Background4,
       Images.Background5,
     ];
-    const randomIndex = Math.floor(Math.random() * backgroundImages.length);
-    return backgroundImages[randomIndex];
+    const backgroundRandomIndex = Math.floor(
+      Math.random() * backgroundImages.length,
+    );
+    return backgroundImages[backgroundRandomIndex];
+  };
+
+  useEffect(() => {
+    //오브젝트 이미지 랜덤으로
+    const randomObjectImageImage = getrandomObjectImageImage();
+    setBackgroundImage(randomObjectImageImage);
+  }, []);
+
+  const getrandomObjectImageImage = () => {
+    const objectImages = [
+      Images.Object3,
+      Images.Object4,
+      Images.Object5,
+      Images.Object6,
+      Images.Object7,
+    ];
+    const objectRandomIndex = Math.floor(Math.random() * objectImages.length);
+    return objectImages[objectRandomIndex];
   };
 
   return (
@@ -48,6 +69,7 @@ function PlayPageView() {
         <View style={styles.inner}>
           <HeaderBtn></HeaderBtn>
           <CharacterIcon></CharacterIcon>
+          <Image source={objectImage} style={styles.objectImage} />
           <View style={styles.OperationBtn}>
             <TouchableOpacity>
               <Image source={Images.StartBtn} style={styles.StartBtn} />
@@ -74,11 +96,14 @@ function HeaderBtn() {
 
 function CharacterIcon() {
   return (
-    <View style={styles.CharacterIcon}>
-      <Image source={Images.CharacterIcon1} style={styles.CharacterIcon1} />
-      <Image source={Images.CharacterIcon2} style={styles.CharacterIcon2} />
-      <Image source={Images.CharacterIcon3} style={styles.CharacterIcon3} />
-    </View>
+    <>
+      <Image source={Images.Score} style={styles.Score} />
+      <View style={styles.CharacterIcon}>
+        <Image source={Images.CharacterIcon1} style={styles.CharacterIcon1} />
+        <Image source={Images.CharacterIcon2} style={styles.CharacterIcon2} />
+        <Image source={Images.CharacterIcon3} style={styles.CharacterIcon3} />
+      </View>
+    </>
   );
 }
 
@@ -117,12 +142,27 @@ const styles = StyleSheet.create({
   },
   CharacterIcon: {
     flexDirection: 'row',
-    top: 100,
+    top: -10,
     right: -100,
+  },
+  Score: {
+    top: 100,
+    right: -37,
+  },
+  objectImage: {
+    resizeMode: 'contain',
+    // width: 100,
+    // height: 100,
+    position: 'absolute',
+    // top: 250,
+    // left: 70,
+    width: 10,
+    height: 10,
+    flexShrink: 0,
   },
   OperationBtn: {
     flexDirection: 'row',
-    top: 430,
+    top: 310,
     right: -80,
   },
   StopBtn: {
