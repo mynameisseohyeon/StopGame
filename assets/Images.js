@@ -21,6 +21,8 @@ const images = {
   Background3: require('./images/Background3.png'),
   Background4: require('./images/Background4.png'),
   Background5: require('./images/Background5.png'),
+  StartBtn: require('./images/startBtn.png'),
+  StopBtn: require('./images/stopBtn.png'),
 };
 
 export default images;
