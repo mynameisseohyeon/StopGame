@@ -23,11 +23,13 @@ function PlayPage() {
 }
 
 function PlayPageView() {
-  const [backgroundImage, setBackgroundImage] = useState(null);
-  const [objectImage, setObjectImage] = useState(null);
+  const [backgroundImage, setBackgroundImage] = useState(null); //배경 이미지
+  const [objectImage, setObjectImage] = useState(null); //오브젝트 이미지
+  const [startButtonDisabled, setStartButtonDisabled] = useState(false); //시작 버튼 비활성화
+  const [startButtonOpacity, setStartButtonOpacity] = useState(1); //시작 버튼 투명도
 
   useEffect(() => {
-    //배경 이미지 랜덤으로
+    // 배경 이미지 랜덤으로
     const randomBackgroundImage = getRandomBackgroundImage();
     setBackgroundImage(randomBackgroundImage);
   }, []);
@@ -45,7 +47,7 @@ function PlayPageView() {
   };
 
   useEffect(() => {
-    //오브젝트 이미지 랜덤으로
+    // 오브젝트 이미지 랜덤으로
     const randomObjectImage = getrandomObjectImage();
     setObjectImage(randomObjectImage);
   }, []);
@@ -63,12 +65,23 @@ function PlayPageView() {
   };
 
   const StartBtnClick = () => {
-    //start 버튼 클릭 시
+    // start 버튼 클릭 시
     console.log('start button clicked');
+    if (!startButtonDisabled) {
+      //버튼이 활성화 상태일 경우
+      setStartButtonDisabled(true);
+      setStartButtonOpacity(0.5);
+      // 오브젝트 내려가는 애니메이션 실행
+      // 애니메이션 종료 후에 setStartButtonDisabled(false) 호출하여 다시 누를 수 있도록 설정
+    }
   };
+
   const StopBtnClick = () => {
-    //stop 버튼 클릭 시
+    // stop 버튼 클릭 시
     console.log('stop button clicked');
+    setStartButtonDisabled(false);
+    setStartButtonOpacity(1);
+    // 오브젝트 내려가는 애니메이션 취소
   };
 
   return (
@@ -80,19 +93,17 @@ function PlayPageView() {
           <CharacterIcon></CharacterIcon>
           <Image source={objectImage} style={styles.objectImage} />
           <View style={styles.OperationBtn}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              disabled={startButtonDisabled}
+              onPress={StartBtnClick}
+              activeOpacity={0.8}>
               <Image
                 source={Images.StartBtn}
-                style={styles.StartBtn}
-                onPress={StartBtnClick}
+                style={[styles.StartBtn, {opacity: startButtonOpacity}]}
               />
             </TouchableOpacity>
-            <TouchableOpacity>
-              <Image
-                source={Images.StopBtn}
-                style={styles.StopBtn}
-                onPress={StopBtnClick}
-              />
+            <TouchableOpacity onPress={StopBtnClick} activeOpacity={0.8}>
+              <Image source={Images.StopBtn} style={styles.StopBtn} />
             </TouchableOpacity>
           </View>
         </View>
