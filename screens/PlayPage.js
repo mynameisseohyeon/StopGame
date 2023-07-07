@@ -46,11 +46,11 @@ function PlayPageView() {
 
   useEffect(() => {
     //오브젝트 이미지 랜덤으로
-    const randomObjectImageImage = getrandomObjectImageImage();
-    setBackgroundImage(randomObjectImageImage);
+    const randomObjectImage = getrandomObjectImage();
+    setObjectImage(randomObjectImage);
   }, []);
 
-  const getrandomObjectImageImage = () => {
+  const getrandomObjectImage = () => {
     const objectImages = [
       Images.Object3,
       Images.Object4,
@@ -151,13 +151,11 @@ const styles = StyleSheet.create({
   },
   objectImage: {
     resizeMode: 'contain',
-    // width: 100,
-    // height: 100,
     position: 'absolute',
-    // top: 250,
-    // left: 70,
-    width: 10,
-    height: 10,
+    top: 100,
+    right: 200,
+    width: 100,
+    height: 100,
     flexShrink: 0,
   },
   OperationBtn: {
