@@ -23,10 +23,11 @@ function PlayPage() {
 }
 
 function PlayPageView() {
-  const [backgroundImage, setBackgroundImage] = useState(null); //배경 이미지
-  const [objectImage, setObjectImage] = useState(null); //오브젝트 이미지
-  const [startButtonDisabled, setStartButtonDisabled] = useState(false); //시작 버튼 비활성화
-  const [startButtonOpacity, setStartButtonOpacity] = useState(1); //시작 버튼 투명도
+  const [backgroundImage, setBackgroundImage] = useState(null);
+  const [objectImage, setObjectImage] = useState(null);
+  const [startButtonDisabled, setStartButtonDisabled] = useState(false);
+  const [startButtonOpacity, setStartButtonOpacity] = useState(1);
+  const [objectY] = useState(new Animated.Value(100));
 
   useEffect(() => {
     // 배경 이미지 랜덤으로
@@ -65,23 +66,34 @@ function PlayPageView() {
   };
 
   const StartBtnClick = () => {
-    // start 버튼 클릭 시
     console.log('start button clicked');
     if (!startButtonDisabled) {
-      //버튼이 활성화 상태일 경우
       setStartButtonDisabled(true);
       setStartButtonOpacity(0.5);
-      // 오브젝트 내려가는 애니메이션 실행
-      // 애니메이션 종료 후에 setStartButtonDisabled(false) 호출하여 다시 누를 수 있도록 설정
+      animateObject();
     }
   };
 
+  const animateObject = () => {
+    const duration = Math.floor(Math.random() * 2300) + 200; // 0.2s ~ 2.5s 사이의 랜덤한 시간 설정
+    objectY.setValue(100); // 초기 위치로 설정
+
+    const objectAnimation = Animated.timing(objectY, {
+      toValue: 800, // 내려올 위치 설정
+      duration: duration,
+      useNativeDriver: false,
+    });
+
+    objectAnimation.start(() => {
+      setStartButtonDisabled(false);
+      setStartButtonOpacity(1);
+    });
+  };
+
   const StopBtnClick = () => {
-    // stop 버튼 클릭 시
     console.log('stop button clicked');
     setStartButtonDisabled(false);
     setStartButtonOpacity(1);
-    // 오브젝트 내려가는 애니메이션 취소
   };
 
   return (
@@ -89,9 +101,17 @@ function PlayPageView() {
       <View style={styles.block}>
         <Image source={backgroundImage} style={styles.backgroundImage} />
         <View style={styles.inner}>
-          <HeaderBtn></HeaderBtn>
-          <CharacterIcon></CharacterIcon>
-          <Image source={objectImage} style={styles.objectImage} />
+          <HeaderBtn />
+          <CharacterIcon />
+          <Animated.Image
+            source={objectImage}
+            style={[
+              styles.objectImage,
+              {
+                transform: [{translateY: objectY}],
+              },
+            ]}
+          />
           <View style={styles.OperationBtn}>
             <TouchableOpacity
               disabled={startButtonDisabled}
@@ -180,7 +200,7 @@ const styles = StyleSheet.create({
   objectImage: {
     resizeMode: 'contain',
     position: 'absolute',
-    top: 100,
+    top: 0,
     right: 200,
     width: 100,
     height: 100,
