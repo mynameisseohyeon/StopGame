@@ -16,23 +16,45 @@ function PlayPage() {
   return (
     <>
       <View>
-        <PlayPagenView />
+        <PlayPageView />
       </View>
     </>
   );
 }
 
-function PlayPagenView() {
+function PlayPageView() {
+  const [backgroundImage, setBackgroundImage] = useState(null);
+
+  useEffect(() => {
+    //배경 이미지 랜덤으로
+    const randomBackgroundImage = getRandomBackgroundImage();
+    setBackgroundImage(randomBackgroundImage);
+  }, []);
+
+  const getRandomBackgroundImage = () => {
+    const backgroundImages = [
+      Images.Background3,
+      Images.Background4,
+      Images.Background5,
+    ];
+    const randomIndex = Math.floor(Math.random() * backgroundImages.length);
+    return backgroundImages[randomIndex];
+  };
+
   return (
     <>
       <View style={styles.block}>
-        <Image source={Images.Background3} style={styles.Background3} />
+        <Image source={backgroundImage} style={styles.backgroundImage} />
         <View style={styles.inner}>
           <HeaderBtn></HeaderBtn>
           <CharacterIcon></CharacterIcon>
           <View style={styles.OperationBtn}>
-            <Image source={Images.StartBtn} style={styles.StartBtn} />
-            <Image source={Images.StopBtn} style={styles.StopBtn} />
+            <TouchableOpacity>
+              <Image source={Images.StartBtn} style={styles.StartBtn} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Image source={Images.StopBtn} style={styles.StopBtn} />
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -79,13 +101,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: 499,
     height: 915,
-    flexShrink: 0,
-  },
-  Background3: {
-    position: 'absolute',
-    width: '100%',
-    height: '95%',
-    top: -100,
     flexShrink: 0,
   },
   HeaderBtn: {
