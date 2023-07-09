@@ -82,11 +82,11 @@ function PlayPageView() {
 
   const animateObject = () => {
     // 오브젝트 랜덤한 시간 동안 y값 변경
-    const duration = Math.floor(Math.random() * 1500) + 200; // 0.2s ~ 1.5s 사이의 랜덤한 시간 설정
+    const duration = Math.floor(Math.random() * 1500) + 400; // 0.4s ~ 1.5s 사이의 랜덤한 시간 설정
     objectY.setValue(100); // 초기 위치로 설정
 
     const animation = Animated.timing(objectY, {
-      toValue: 700, // 내려올 위치 설정
+      toValue: 650, // 내려올 위치 설정
       duration: duration,
       useNativeDriver: false,
     });
@@ -106,6 +106,10 @@ function PlayPageView() {
     }
     setStartButtonDisabled(false);
     setStartButtonOpacity(1);
+
+    const objectYValue = objectY._value; // Stop된 시점의 objectY의 값 가져오기
+    const distanceFromObject = 495 - objectYValue; // ObjectImages와의 거리 계산
+    console.log('Distance from Object:', distanceFromObject);
   };
 
   return (
@@ -124,7 +128,7 @@ function PlayPageView() {
               },
             ]}
           />
-          <StopLine />
+          <View style={styles.StopLine}></View>
           <View style={styles.OperationBtn}>
             <TouchableOpacity
               disabled={startButtonDisabled}
@@ -164,14 +168,6 @@ function CharacterIcon() {
         <Image source={Images.CharacterIcon2} style={styles.CharacterIcon2} />
         <Image source={Images.CharacterIcon3} style={styles.CharacterIcon3} />
       </View>
-    </>
-  );
-}
-
-function StopLine() {
-  return (
-    <>
-      <View style={styles.StopLine}></View>
     </>
   );
 }
@@ -221,7 +217,7 @@ const styles = StyleSheet.create({
   objectImage: {
     resizeMode: 'contain',
     position: 'absolute',
-    top: 0,
+    top: -50,
     right: 200,
     width: 100,
     height: 100,
