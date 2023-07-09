@@ -29,6 +29,8 @@ const images = {
   Object5: require('./images/object5.png'),
   Object6: require('./images/object6.png'),
   Object7: require('./images/object7.png'),
+
+  Failed: require('./images/Failed.png'),
 };
 
 export default images;

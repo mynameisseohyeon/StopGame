@@ -29,6 +29,7 @@ function PlayPageView() {
   const [startButtonOpacity, setStartButtonOpacity] = useState(1);
   const [objectY] = useState(new Animated.Value(100));
   const [objectAnimation, setObjectAnimation] = useState(null);
+  const [showFailedImage, setShowFailedImage] = useState(false);
 
   useEffect(() => {
     // 배경 이미지 랜덤으로
@@ -70,8 +71,9 @@ function PlayPageView() {
     console.log('start button clicked');
     if (!startButtonDisabled) {
       //start버튼 활성화 시
-      setStartButtonDisabled(true);
-      setStartButtonOpacity(0.5);
+      setStartButtonDisabled(true); //start버튼 초기화
+      setStartButtonOpacity(0.5); //버튼 투명도 초기화
+      setShowFailedImage(false); //실패 이미지 숨기기
       const randomBackgroundImage = getRandomBackgroundImage(); //배경 랜덤 이미지
       setBackgroundImage(randomBackgroundImage);
       const randomObjectImage = getrandomObjectImage(); //오브젝트 랜덤 이미지
@@ -109,7 +111,13 @@ function PlayPageView() {
 
     const objectYValue = objectY._value; // Stop된 시점의 objectY의 값 가져오기
     const distanceFromObject = 495 - objectYValue; // ObjectImages와의 거리 계산
-    console.log('Distance from Object:', distanceFromObject);
+    console.log('Distance from Object:', distanceFromObject); //오브젝트와 기준선과이 차이 출력
+
+    if (distanceFromObject < 0) {
+      setShowFailedImage(true); // failed image 보여주기
+    } else {
+      setShowFailedImage(false); // failed image 숨기기
+    } //기준선과의 거리가 -일 경우
   };
 
   return (
@@ -128,6 +136,11 @@ function PlayPageView() {
               },
             ]}
           />
+          {showFailedImage && ( // 기준선과의 거리가 -일 경우
+            <View>
+              <Image source={Images.Failed} style={styles.Failed} />
+            </View>
+          )}
           <View style={styles.StopLine}></View>
           <View style={styles.OperationBtn}>
             <TouchableOpacity
@@ -240,6 +253,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 5,
     borderStyle: 'dotted',
     borderColor: 'red',
+  },
+  Failed: {
+    position: 'absolute',
+    top: 50,
+    right: 85,
   },
 });
 
