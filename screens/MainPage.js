@@ -20,11 +20,13 @@ function MainPage({navigation}) {
 }
 
 function MainPageView({navigation}) {
+  // navigation prop을 받아온다
   const [playBtnClicked, setPlayBtnClicked] = useState(false);
   const [titleOpacity] = useState(new Animated.Value(0));
 
   const handlePlayBtnClick = () => {
-    setPlayBtnClicked(!playBtnClicked);
+    //play버튼 클릭 시
+    setPlayBtnClicked(!playBtnClicked); //클릭 시 true와 false가 전환된다
     console.log('play button clicked');
 
     navigation.navigate('CharacterSelectPage');
@@ -39,6 +41,7 @@ function MainPageView({navigation}) {
   }, []);
 
   const getOpacityStyle = () => {
+    //투명도 조절
     return {opacity: playBtnClicked ? 0.5 : 1};
   };
 

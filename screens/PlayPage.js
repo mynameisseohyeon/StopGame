@@ -124,6 +124,7 @@ function PlayPageView() {
               },
             ]}
           />
+          <StopLine />
           <View style={styles.OperationBtn}>
             <TouchableOpacity
               disabled={startButtonDisabled}
@@ -163,6 +164,14 @@ function CharacterIcon() {
         <Image source={Images.CharacterIcon2} style={styles.CharacterIcon2} />
         <Image source={Images.CharacterIcon3} style={styles.CharacterIcon3} />
       </View>
+    </>
+  );
+}
+
+function StopLine() {
+  return (
+    <>
+      <View style={styles.StopLine}></View>
     </>
   );
 }
@@ -226,6 +235,15 @@ const styles = StyleSheet.create({
   StopBtn: {
     top: -7,
     right: -60,
+  },
+  StopLine: {
+    top: 300,
+    right: -50,
+    width: 404,
+    borderWidth: 0,
+    borderBottomWidth: 5,
+    borderStyle: 'dotted',
+    borderColor: 'red',
   },
 });
 
