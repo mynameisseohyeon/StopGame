@@ -82,7 +82,7 @@ function PlayPageView() {
 
   const animateObject = () => {
     // 오브젝트 랜덤한 시간 동안 y값 변경
-    const duration = Math.floor(Math.random() * 2500) + 200; // 0.2s ~ 2.5s 사이의 랜덤한 시간 설정
+    const duration = Math.floor(Math.random() * 1500) + 200; // 0.2s ~ 1.5s 사이의 랜덤한 시간 설정
     objectY.setValue(100); // 초기 위치로 설정
 
     const animation = Animated.timing(objectY, {

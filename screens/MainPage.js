@@ -1,35 +1,33 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
-import {
-  StyleSheet,
-  TextInput,
-  useWindowDimensions,
-  Animated,
-  Keyboard,
-  Platform,
-  KeyboardAvoidingView,
-  Image,
-} from 'react-native';
+import {Text, View, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, Animated} from 'react-native';
 import Images from '../assets/Images';
+import {NavigationContainer} from '@react-navigation/native';
+import CharacterSelectPage from './CharacterSelectPage';
 
-function MainPage() {
+function MainPage({navigation}) {
   return (
     <>
       <View>
-        <MainPageView />
+        <MainPageView>
+          {/* <NavigationContainer>
+            <CharacterSelectPage />
+          </NavigationContainer> */}
+        </MainPageView>
       </View>
     </>
   );
 }
 
-function MainPageView() {
-  const [playBtnClicked, setPlayBtnClicked] = useState(false); //play버튼 클릭 시
+function MainPageView({navigation}) {
+  const [playBtnClicked, setPlayBtnClicked] = useState(false);
   const [titleOpacity] = useState(new Animated.Value(0));
 
   const handlePlayBtnClick = () => {
-    //클릭 시 true와 false가 전환된다
     setPlayBtnClicked(!playBtnClicked);
     console.log('play button clicked');
+
+    navigation.navigate('CharacterSelectPage');
   };
 
   useEffect(() => {
@@ -128,7 +126,6 @@ const styles = StyleSheet.create({
     width: '35%',
     height: '5%',
     flexShrink: 0,
-    // borderWidth: 2,
     borderColor: 'green',
     borderRadius: 5,
     justifyContent: 'center',
