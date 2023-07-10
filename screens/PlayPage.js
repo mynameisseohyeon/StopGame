@@ -89,15 +89,18 @@ function PlayPageView() {
 
     const animation = Animated.timing(objectY, {
       toValue: 650, // 내려올 위치 설정
-      duration: duration,
+      duration: duration, //활성화
       useNativeDriver: false,
     });
 
     setObjectAnimation(animation);
+    //해당 setObjectAnimation을 작성해주지 않으면 start버튼을 눌렀을 떄도 정상적으로
+    //만약 이 코드가 없다면stop애니메이션이 작동하지 않는다
+    //현재 애니메이션의 상태를 저장
 
     animation.start(() => {
-      setStartButtonDisabled(false);
-      setStartButtonOpacity(1);
+      setStartButtonDisabled(false); //start버튼 비활성화 상태를 활성화 시
+      setStartButtonOpacity(1); //투명도 초기화
     });
   };
 

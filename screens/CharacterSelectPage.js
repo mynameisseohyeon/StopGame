@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
 import {
+  Text,
+  View,
+  TouchableOpacity,
   StyleSheet,
   TextInput,
   useWindowDimensions,
@@ -13,6 +15,7 @@ import {
 
 import Images from '../assets/Images';
 
+// CharacterSelectPage 컴포넌트
 function CharacterSelectPage() {
   return (
     <>
@@ -21,6 +24,7 @@ function CharacterSelectPage() {
   );
 }
 
+// CharacterSelectPageView 컴포넌트
 function CharacterSelectPageView() {
   const [selectedCharacters, setSelectedCharacters] = useState([]); // 선택된 캐릭터 함수
   const [titleOpacity] = useState(new Animated.Value(0)); // title 투명도 조절 초깃값 0설정
@@ -60,6 +64,7 @@ function CharacterSelectPageView() {
   return (
     <>
       <View style={styles.block}>
+        {/* 배경 이미지 */}
         <Image
           source={Images.CharacterBackground}
           style={styles.backgroundImage}
@@ -67,6 +72,7 @@ function CharacterSelectPageView() {
         <View style={styles.inner}>
           <View style={styles.Character}>
             <View style={styles.charactersRow}>
+              {/* 캐릭터 1 */}
               <TouchableOpacity
                 onPress={() => handleCharacterPress('character1')}
                 style={[
@@ -78,6 +84,8 @@ function CharacterSelectPageView() {
                   <Text style={styles.playerText}>Player 1</Text>
                 )}
               </TouchableOpacity>
+
+              {/* 캐릭터 2 */}
               <TouchableOpacity
                 onPress={() => handleCharacterPress('character2')}
                 style={[
@@ -89,6 +97,8 @@ function CharacterSelectPageView() {
                   <Text style={styles.playerText}>Player 2</Text>
                 )}
               </TouchableOpacity>
+
+              {/* 캐릭터 3 */}
               <TouchableOpacity
                 onPress={() => handleCharacterPress('character3')}
                 style={[
@@ -102,10 +112,14 @@ function CharacterSelectPageView() {
               </TouchableOpacity>
             </View>
           </View>
+
+          {/* 타이틀 이미지 */}
           <Animated.Image
             source={Images.CharacterPageTitle}
             style={[styles.CharacterPageTitle, {opacity: titleOpacity}]}
           />
+
+          {/* Play 버튼 */}
           {isPlayButtonVisible && (
             <TouchableOpacity
               onPress={handlePlayButtonPress}

@@ -17,7 +17,6 @@ try {
 function App() {
   return (
     <View>
-      <Audio />
       {/* <MainPage /> */}
       {/* <CharacterSelectPage /> */}
       <PlayPage />
